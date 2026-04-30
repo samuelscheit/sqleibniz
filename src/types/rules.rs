@@ -14,7 +14,8 @@ pub enum Rule {
     BadSqleibnizInstruction,
     /// Source file uses sql features sqlite does not support
     SqliteUnsupported,
-    /// Sqlite or SQL quirk: https://www.sqlite.org/quirks.html
+    /// Sqlite or SQL quirk: https://www.sqlite.org/quirks.html; anything where SQLite deviates
+    /// from a stricter, conventional SQL model
     Quirk,
     /// Source file contains an unterminated string
     UnterminatedString,

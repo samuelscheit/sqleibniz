@@ -1464,8 +1464,9 @@ impl<'a> Parser<'a> {
 
             if SqliteStorageClass::from_str_strict(name.as_str()).is_none() {
                 let mut e = self.err(
-                    format!("Type `{name}` is not a sqlite type and thus will be of type INTEGER"),
-                    "Consider using a known sqlite type: TEXT, BLOB, REAL or INTEGER",
+                    format!("non-canonical SQLite type name `{name}`",),
+                    &format!("SQLite will assign {} affinity to this column based on it being declared as type {name}. Consider using a canonical sqlite type: TEXT, BLOB, REAL or INTEGER instead.",
+                        SqliteStorageClass::from_str(name.as_str())),
                     self.cur(),
                     Rule::Quirk,
                 );

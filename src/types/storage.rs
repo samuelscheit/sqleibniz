@@ -31,11 +31,11 @@ impl StrExtension for &str {
 impl Display for SqliteStorageClass {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match *self {
-            Self::Null => write!(f, "SqliteStorageClass::Null"),
-            Self::Real => write!(f, "SqliteStorageClass::Real"),
-            Self::Text => write!(f, "SqliteStorageClass::Text"),
-            Self::Blob => write!(f, "SqliteStorageClass::Blob"),
-            Self::Integer => write!(f, "SqliteStorageClass::Integer"),
+            Self::Null => write!(f, "NULL"),
+            Self::Real => write!(f, "REAL"),
+            Self::Text => write!(f, "TEXT"),
+            Self::Blob => write!(f, "BLOB"),
+            Self::Integer => write!(f, "INTEGER"),
         }
     }
 }
