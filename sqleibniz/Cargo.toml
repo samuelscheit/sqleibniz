@@ -5,6 +5,7 @@ edition = "2024"
 description = "Static analysis and LSP for SQL in Rust"
 repository = "https://github.com/xnacly/sqleibniz"
 license = "MIT"
+readme = "../README.md"
 
 categories = ["development-tools"]
 keywords = ["sql", "lsp", "static-analysis", "parser", "language-server"]
@@ -13,7 +14,7 @@ keywords = ["sql", "lsp", "static-analysis", "parser", "language-server"]
 trace = ["sqleibniz-proc"]
 
 [dependencies]
-sqleibniz-proc = { version = "0.1.0", optional = true }
+sqleibniz-proc = { version = "0.0.1", optional = true }
 
 clap = { version = "4.5", features = ["derive"] }
 lsp-server = "0.7.8"

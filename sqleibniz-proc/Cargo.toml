@@ -3,6 +3,7 @@ name = "sqleibniz-proc"
 version = "0.0.1"
 edition = "2024"
 description = "Internal proc macros for sqleibniz"
+repository = "https://github.com/xnacly/sqleibniz"
 license = "MIT"
 
 [lib]
