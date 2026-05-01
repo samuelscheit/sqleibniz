@@ -15,8 +15,3 @@ examples:
 		-Dbad-sqleibniz-instruction \
 		$(shell find ./example -name "*.sql")
 
-cov:
-	cargo tarpaulin --out Html
-	python3 -m http.server 8080
-	xdg-open "http://localhost:8080/tarpaulin-report.html"
-

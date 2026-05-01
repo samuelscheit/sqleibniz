@@ -1,4 +1,5 @@
 #![allow(dead_code)]
+
 #[cfg(feature = "trace")]
 use std::time::SystemTime;
 use std::{fs, process::exit, vec};

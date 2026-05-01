@@ -1,7 +1,7 @@
 use nodes::{BindParameter, SchemaTableContainer};
 
 #[cfg(feature = "trace")]
-use proc::trace;
+use sqleibniz_proc::trace;
 
 use crate::{
     error::{Error, ImprovedLine},
