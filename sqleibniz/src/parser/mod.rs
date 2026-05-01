@@ -1179,17 +1179,17 @@ impl<'a> Parser<'a> {
                     let cur = self.cur().clone();
                     self.errors.push(match cur.ttype {
                         Type::Keyword(keyword) => {
-                let target_name = target_name.unwrap_or_else(|| "table");
+                let target_name = target_name.unwrap_or("table");
                             let as_str: &str = keyword.into();
                             self.err(
-                            &format!("Malformed {target_name} name"),
+                            format!("Malformed {target_name} name"),
                             &format!("`{as_str}` is a keyword, if you want to use it as a {target_name} or column name, quote it: '{as_str}'"),
                             &cur, Rule::Syntax)
                         }
                         _ => {
-                let target_name = target_name.unwrap_or_else(|| "table");
+                let target_name = target_name.unwrap_or("table");
                             self.err(
-                                                    &format!("Malformed {target_name} name"),
+                                                    format!("Malformed {target_name} name"),
                                                     &format!(
                                                         "expected a {target_name} name after <schema_name>. - got {:?}",
                                                         cur.ttype
@@ -1213,9 +1213,9 @@ impl<'a> Parser<'a> {
             }
             _ => {
                 let cur = self.cur().clone();
-                let target_name = target_name.unwrap_or_else(|| "table");
+                let target_name = target_name.unwrap_or("table");
                 self.push_err(
-                    &format!("Malformed {} name", target_name),
+                    format!("Malformed {} name", target_name),
                     &format!(
                         "expected either schema_name.{} or {}, got {:?}",
                         target_name, target_name, cur.ttype
