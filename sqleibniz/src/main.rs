@@ -5,29 +5,12 @@ use std::time::SystemTime;
 use std::{fs, process::exit, vec};
 
 use clap::Parser;
-use error::{print_str_colored, warn};
-use highlight::builder;
-use lexer::Lexer;
-use types::config::Config;
-use types::rules::Rule;
-
-use crate::error::Error;
-
-/// error does formatting and highlighting for errors
-mod error;
-/// highlight implements logic for highlighting tokens found in a string
-mod highlight;
-/// lev implements the levenshtein distance for all sql keywords, this is used to recommend a keyword based on a misspelled word or any
-/// unknown keyword at an arbitrary location in the source statement - mainly used at the start of a new statement
-mod lev;
-/// lexer converts the input into a stream of token for the parser
-mod lexer;
-/// lsp implements the language server protocol to provide diagnostics, suggestions and snippets for sql based on the sqleibniz tooling
-mod lsp;
-/// parser converts the token stream into an abstract syntax tree
-mod parser;
-/// types holds all shared types between the above modules
-mod types;
+use sqleibniz::error::{self, Error, print_str_colored, warn};
+use sqleibniz::highlight::builder;
+use sqleibniz::lexer::Lexer;
+use sqleibniz::parser;
+use sqleibniz::types::config::Config;
+use sqleibniz::types::rules::Rule;
 
 /// LSP and analysis cli for sql. Check for valid syntax, semantics and perform dynamic analysis.
 #[derive(clap::Parser)]
@@ -108,7 +91,7 @@ fn main() {
     let args = Cli::parse();
 
     if args.lsp {
-        if let Err(e) = lsp::start() {
+        if let Err(e) = sqleibniz::lsp::start() {
             panic!("fatal error in language server: {}", e);
         }
         return;

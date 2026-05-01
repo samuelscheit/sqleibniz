@@ -544,13 +544,24 @@ dependencies = [
  "pretty_assertions",
  "serde",
  "serde_json",
- "sqleibniz-proc",
+ "sqleibniz-proc 0.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "toml",
 ]
 
 [[package]]
 name = "sqleibniz-proc"
 version = "0.0.1"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "sqleibniz-proc"
+version = "0.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9368a53b100b69ab7d1a8d3cbb96a5728dda4759c1d45148408d918cd7686284"
 dependencies = [
  "proc-macro2",
  "quote",
