@@ -128,6 +128,9 @@ Options:
   -s, --silent
           disable stdout/stderr output
 
+  -k, --kiss
+          keep it simple, stupid :^): make all stdoutput small and summarizing
+
   -D <DISABLE>
           disable diagnostics by their rules, all are enabled by default - this may change in the future
 
@@ -152,6 +155,9 @@ Options:
       --ast
           dump the abstract syntax tree as rusts pretty printed debugging
 
+      --sarif
+          emit SARIF 2.1.0 JSON to stdout
+
       --lsp
           invoke sqleibniz as a language server
 
@@ -161,6 +167,14 @@ Options:
   -V, --version
           Print versio
 ```
+
+Emit SARIF for CI or code-scanning integrations:
+
+```sh
+sqleibniz --sarif example/sqleibniz.sql > results.sarif
+```
+
+`--sarif` writes machine-readable SARIF JSON to stdout and exits nonzero when diagnostics are found.
 
 ### Configuration
 
