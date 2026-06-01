@@ -62,24 +62,6 @@ impl mlua::FromLua for Rule {
 }
 
 impl Rule {
-    pub fn all() -> &'static [Self] {
-        &[
-            Self::NoContent,
-            Self::NoStatements,
-            Self::Unimplemented,
-            Self::UnknownKeyword,
-            Self::BadSqleibnizInstruction,
-            Self::SqliteUnsupported,
-            Self::Quirk,
-            Self::UnterminatedString,
-            Self::UnknownCharacter,
-            Self::InvalidNumericLiteral,
-            Self::InvalidBlob,
-            Self::Syntax,
-            Self::Semicolon,
-        ]
-    }
-
     pub fn name(&self) -> &str {
         match self {
             Self::NoContent => "NoContent",

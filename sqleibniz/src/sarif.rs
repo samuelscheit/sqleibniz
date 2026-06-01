@@ -1,3 +1,6 @@
+use std::borrow::Cow;
+
+use clap::ValueEnum;
 use serde_json::{Value, json};
 
 use crate::{error::Error, types::rules::Rule};
@@ -6,6 +9,11 @@ const SARIF_SCHEMA: &str =
     "https://docs.oasis-open.org/sarif/sarif/v2.1.0/os/schemas/sarif-schema-2.1.0.json";
 
 pub fn log(errors: &[Error]) -> Value {
+    let rules = Rule::value_variants()
+        .iter()
+        .map(rule_descriptor)
+        .collect::<Vec<_>>();
+
     json!({
         "$schema": SARIF_SCHEMA,
         "version": "2.1.0",
@@ -15,7 +23,7 @@ pub fn log(errors: &[Error]) -> Value {
                     "name": "sqleibniz",
                     "version": env!("CARGO_PKG_VERSION"),
                     "informationUri": env!("CARGO_PKG_REPOSITORY"),
-                    "rules": Rule::all().iter().map(rule_descriptor).collect::<Vec<_>>(),
+                    "rules": rules,
                 }
             },
             "results": errors.iter().map(result).collect::<Vec<_>>(),
@@ -39,9 +47,9 @@ fn rule_descriptor(rule: &Rule) -> Value {
 fn result(error: &Error) -> Value {
     let end_column = usize::max(error.end + 1, error.start + 2);
     let message = if error.note.is_empty() {
-        error.msg.clone()
+        Cow::Borrowed(error.msg.as_str())
     } else {
-        format!("{}: {}", error.msg, error.note)
+        Cow::Owned(format!("{}: {}", error.msg, error.note))
     };
 
     let mut value = json!({
@@ -53,7 +61,7 @@ fn result(error: &Error) -> Value {
         "locations": [{
             "physicalLocation": {
                 "artifactLocation": {
-                    "uri": error.file,
+                    "uri": error.file.as_str(),
                 },
                 "region": {
                     "startLine": error.line + 1,
